@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>simple websocket client</title>
+</head>
+<body>
+
+<br><br>
+
+Server URL: <input id="url" type="text" value="ws://raspberrypi.local:8888/test" style="width:300px;" />
+<input type="button" value="connect" onclick="connect()"/>
+<input type="button" value="disconnect" onclick="disconnect()"/>
+
+<br><br>
+
+Message: <input id="msg" type="text" style="width:300px;" />
+<input type="button" value="send" onclick="sendMessage()"/>
+
+<br><br>
+
+<input type="button" value="loop!" onclick="startLoop()"/>
+
+
+<script src="http://easywebsocket.org/easyWebSocket.min.js"></script>
+<script>
+    var connection;
+
+    function connect(){
+        var url = document.getElementById("url").value;
+        connection = new WebSocket(url);
+        connection.onerror = function (error) {
+            console.log('WebSocket Error ' + error);
+        };
+    }
+
+    function disconnect(){
+        connection.close();
+    }
+
+    function sendMessage(){
+        var message = document.getElementById("msg").value;
+        connection.send(message);
+    }
+
+    function startLoop(){
+        loop(0,0);
+    }
+    function loop(x, y){
+        if(y==8){
+            y=0;
+            x+=1;
+        }
+        if(x==8) return;
+        connection.send("" + x + y);
+        window.setTimeout("loop(" + x + ", " + (y+1) + ")", 50);
+    }
+
+</script>
+</body>
+</html>
