@@ -1,6 +1,7 @@
 package net.slintes.raspidroid;
 
-import net.slintes.raspi.Ampel;
+import net.slintes.raspiAmpel.Ampel;
+import net.slintes.raspiAmpel.AmpelFactory;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,31 +21,23 @@ public class RaspiAmpel {
     private Ampel ampel;
 
     public RaspiAmpel(){
-        try {
-            ampel = new Ampel(GPIO_PIN_RED, GPIO_PIN_YELLOW, GPIO_PIN_GREEN);
-            ampel.setState(Ampel.State.RED);
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
+        ampel = AmpelFactory.createAmpel(GPIO_PIN_RED, GPIO_PIN_YELLOW, GPIO_PIN_GREEN);
+        ampel.setState(Ampel.State.RED);
     }
 
     public void serverStarted(){
-        if(ampel == null) return;
         ampel.setState(Ampel.State.RED_YELLOW);
     }
 
     public void clientConnected(){
-        if(ampel == null) return;
         ampel.setState(Ampel.State.GREEN);
     }
 
     public void clientDisconnected(){
-        if(ampel == null) return;
         ampel.setState(Ampel.State.RED_YELLOW);
     }
 
     public void error(){
-        if(ampel == null) return;
         ampel.setState(Ampel.State.RED);
     }
 }

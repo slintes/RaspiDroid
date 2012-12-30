@@ -34,7 +34,7 @@ public class RDMessage {
     }
 
     public String toMessageString(){
-        // x and y are < 8, just concatinate them
+        // x and y are < 8, just concatenate them
         return ("" + x) + y;
     }
 

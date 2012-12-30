@@ -1,6 +1,7 @@
 package net.slintes.raspidroid;
 
-import net.slintes.raspi.Adafruit8x8LEDMatrix;
+import net.slintes.raspiMatrix.LEDMatrix;
+import net.slintes.raspiMatrix.LEDMatrixFactory;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,28 +13,23 @@ import net.slintes.raspi.Adafruit8x8LEDMatrix;
  */
 public class RaspiLEDMatrix {
 
-    private Adafruit8x8LEDMatrix matrix;
+    private static final int I2CBUS_NR = 1; // 0 on older Pi revisions
+    private static final int I2C_ADDRESS = 0x70; // Adafdruit LED matrix default
+
+    private LEDMatrix matrix;
 
     public RaspiLEDMatrix() {
-        try {
-            matrix = new Adafruit8x8LEDMatrix(1, 0x70);
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
+        matrix = LEDMatrixFactory.createLEDMatrix(I2CBUS_NR, I2C_ADDRESS);
     }
 
     public void handleMessage(String message) {
 
         //System.out.println("message received: " + message);
 
-        if(matrix == null) return;
-
-        try {
-            RDMessage rdMessage = RDMessage.fromMessageString(message);
-            matrix.clear(true);
-            matrix.setPixel(rdMessage.getX(), rdMessage.getY(), Adafruit8x8LEDMatrix.LedColor.GREEN);
-            matrix.writeDisplay();
-        } catch (Exception e) {}
+        RDMessage rdMessage = RDMessage.fromMessageString(message);
+        matrix.clear(true);
+        matrix.setPixel(rdMessage.getX(), rdMessage.getY(), LEDMatrix.LedColor.GREEN);
+        matrix.writeDisplay();
 
     }
 }
