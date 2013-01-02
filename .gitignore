@@ -2,3 +2,6 @@
 *~
 target
 /Java-WebSocket
+/RDClient/gen-external-apklibs/
+/RDClient/key.properties
+
