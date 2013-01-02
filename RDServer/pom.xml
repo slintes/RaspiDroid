@@ -5,8 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.slintes.raspidroid</groupId>
-    <artifactId>RaspiDroidServer</artifactId>
+    <artifactId>RaspiServer</artifactId>
     <version>0.1</version>
+    <name>RaspiDroidServer</name>
 
     <dependencies>
         <dependency>
