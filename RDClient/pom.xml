@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+    <groupId>net.slintes.raspidroid</groupId>
+    <artifactId>RaspiDroidClient</artifactId>
+    <version>0.1</version>
+	<packaging>apk</packaging>
+	<name>RaspiDroidClient</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- set a custom format that is guaranteed to grow as a Long number, so 
+			it can be used as version code in the AndroidManifest.xml -->
+		<maven.build.timestamp.format>yyMMddHHmm</maven.build.timestamp.format>
+		<!-- this trick of loading build timestamp into other property is necessary 
+			due to http://jira.codehaus.org/browse/MRESOURCES-99 and also more readable -->
+		<versionCode>${maven.build.timestamp}</versionCode>
+	</properties>
+
+	<dependencies>
+<!-- 
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+-->
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android</artifactId>
+			<version>4.1.1.4</version>
+			<scope>provided</scope>
+		</dependency>
+<!--
+ 		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android-test</artifactId>
+			<version>4.1.1.4</version>
+			<scope>test</scope>
+		</dependency>
+ -->
+
+        <dependency>
+            <groupId>com.googlecode.androidannotations</groupId>
+            <artifactId>androidannotations</artifactId>
+            <version>2.7</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.androidannotations</groupId>
+            <artifactId>androidannotations-api</artifactId>
+            <version>2.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.actionbarsherlock</groupId>
+            <artifactId>library</artifactId>
+            <version>4.1.0</version>
+            <type>apklib</type>
+        </dependency>
+
+        <dependency>
+            <!-- see /dummy-repo/readme.txt -->
+            <groupId>org.java_websocket</groupId>
+            <artifactId>Java-WebSocket</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.slintes.raspidroid</groupId>
+            <artifactId>RaspiDroidCommon</artifactId>
+            <version>0.1</version>
+        </dependency>
+            
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}-${project.version}</finalName>
+
+        <resources>
+            <!-- a pair definition for resource filtering of xml files only (not binary files since they get mangled -->
+            <resource>
+                <directory>${project.basedir}/res</directory>
+                <filtering>true</filtering>
+                <targetPath>${project.build.directory}/filtered-res</targetPath>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/res</directory>
+                <filtering>false</filtering>
+                <targetPath>${project.build.directory}/filtered-res</targetPath>
+                <excludes>
+                    <exclude>**/*.xml</exclude>
+                </excludes>
+            </resource>
+
+            <resource>
+                <directory>${project.basedir}</directory>
+                <filtering>true</filtering>
+                <targetPath>${project.build.directory}/filtered-manifest</targetPath>
+                <includes>
+                    <include>AndroidManifest.xml</include>
+                </includes>
+            </resource>
+        </resources>
+
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0-alpha-2</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>key.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                  <source>1.6</source>
+                  <target>1.6</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>resources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jarsigner-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>sign</goal>
+                            <goal>verify</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <inherited>true</inherited>
+                        <configuration>
+                            <arguments>
+                                <argument>-digestalg</argument>
+                                <argument>SHA1</argument>
+                                <argument>-sigalg</argument>
+                                <argument>MD5withRSA</argument>
+                            </arguments>
+                            <removeExistingSignatures>true</removeExistingSignatures>
+                            <archiveDirectory></archiveDirectory>
+                            <includes>
+                                <include>target/*.apk</include>
+                            </includes>
+                            <keystore>${keystore}</keystore>
+                            <storepass>${storepass}</storepass>
+                            <keypass>${keypass}</keypass>
+                            <alias>android</alias>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                <artifactId>android-maven-plugin</artifactId>
+                <version>3.4.0</version>
+                <extensions>true</extensions>
+
+                <configuration>
+                    <sdk>
+                        <platform>16</platform>
+                        <path>/opt/android-sdk-linux_x86/</path>
+                    </sdk>
+                    <androidManifestFile>${project.build.directory}/filtered-manifest/AndroidManifest.xml</androidManifestFile>
+                    <resourceDirectory>${project.build.directory}/filtered-res</resourceDirectory>
+                    <sign>
+                        <debug>false</debug>
+                    </sign>
+                    <undeployBeforeDeploy>true</undeployBeforeDeploy>
+                    <zipalign>
+                        <skip>false</skip>
+                        <verbose>true</verbose>
+                        <inputApk>${project.build.directory}/${project.artifactId}-${project.version}.apk</inputApk>
+                        <outputApk>${project.build.directory}/${project.artifactId}-${project.version}-signed-aligned.apk</outputApk>
+                    </zipalign>
+                    <proguard>
+                        <skip>true</skip>
+                    </proguard>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>update-manifest</id>
+                        <goals>
+                            <goal>manifest-update</goal>
+                        </goals>
+                        <configuration>
+                            <manifest>
+                                <versionName>${project.version}</versionName>
+                                <versionCode>${versionCode}</versionCode>
+                                <debuggable>false</debuggable>
+                            </manifest>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>zipalign</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>zipalign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.5</version>
+                <configuration>
+                    <artifacts>
+                        <artifact>
+                            <file>${project.build.directory}/${project.artifactId}-${project.version}-signed-aligned.apk</file>
+                            <type>apk</type>
+                            <classifier>signed-aligned</classifier>
+                        </artifact>
+                        <artifact>
+                            <file>${project.build.directory}/proguard/mapping.txt</file>
+                            <type>map</type>
+                            <classifier>release</classifier>
+                        </artifact>
+                    </artifacts>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+	</build>
+
+    <repositories>
+        <repository>
+            <!-- see /dummy-repo/readme.txt -->
+            <id>my-local-repo</id>
+            <url>file://${basedir}/dummy-repo</url>
+        </repository>
+    </repositories>
+
+</project>

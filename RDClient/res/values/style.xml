@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.RaspiDroidClient" parent="Theme.Sherlock">
+		<item name="android:actionBarStyle">@style/Theme.RaspiDroidClient.ActionBar</item>
+		<item name="actionBarStyle">@style/Theme.RaspiDroidClient.ActionBar</item>
+	</style>
+	
+	<style name="Theme.RaspiDroidClient.ActionBar" parent="Widget.Sherlock.ActionBar">
+		<item name="android:displayOptions">showHome|showTitle</item>
+		<item name="displayOptions">showHome|showTitle</item>
+	</style>
+</resources>

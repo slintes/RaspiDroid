@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RaspiDroid</string>
+    <string name="help">Help</string>
+    <string name="defaultUrl">ws://192.168.2.28:8888</string>
+    <string name="defaultUrlHint">Websocket URL</string>
+    <string name="connectButtonOff">Disconnected</string>
+    <string name="connectButtonOn">Connected</string>
+    <string name="loopButtonOff">No Looping</string>
+    <string name="loopButtonOn">Looping</string>
+</resources>

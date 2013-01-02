@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/defaultUrl"
+                android:id="@+id/url"
+                android:editable="true"
+                android:enabled="true"
+                android:inputType="textUri"
+                android:hint="@string/defaultUrlHint"/>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+            <ToggleButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/connect"
+                    android:layout_weight="1"
+                    android:textOff="@string/connectButtonOff"
+                    android:textOn="@string/connectButtonOn"/>
+
+            <ToggleButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/loop"
+                    android:layout_weight="1"
+                    android:textOff="@string/loopButtonOff"
+                    android:textOn="@string/loopButtonOn"/>
+
+
+        </LinearLayout>
+
+        <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/space"
+                android:src="@drawable/icon"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
