@@ -40,9 +40,8 @@ public class WSClient  extends WebSocketClient {
         log("ws: onError: " + ex.getMessage());
     }
 
-    @Override
-    public void send(String text) throws NotYetConnectedException {
-        super.send(text);
+    public void send(RDMessage msg) throws NotYetConnectedException {
+        super.send(msg.toMessageString());
     }
 
     private void log(String msg){

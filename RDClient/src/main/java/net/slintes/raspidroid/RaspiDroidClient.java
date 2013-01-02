@@ -116,7 +116,7 @@ public class RaspiDroidClient extends SherlockActivity {
                 }
             }
 
-            ws.send("" + x + y);
+            ws.send(new RDMessage(x, y));
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {}
@@ -146,7 +146,7 @@ public class RaspiDroidClient extends SherlockActivity {
         log("xPos: " + xPos + ", yPos: " + yPos);
 
         if(ws != null){
-            ws.send("" + yPos + xPos);
+            ws.send(new RDMessage(yPos, xPos));
         }
 
         try {
