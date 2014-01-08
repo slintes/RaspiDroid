@@ -2,6 +2,9 @@ Sources for a Raspberry Pi running on Java, with some LEDs and an Adafruit LED m
 
 See it in action: http://www.youtube.com/watch?v=g_Mn1BiplmY
 
+Supports scrolling text now, too, see this:
+* http://www.youtube.com/watch?v=JQi7WSU2Fak
+* https://twitter.com/slintes/status/420916372852318209/photo/1
 
 Some links to used components and software:
 
