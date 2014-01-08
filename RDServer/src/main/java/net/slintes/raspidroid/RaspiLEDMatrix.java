@@ -49,7 +49,7 @@ public class RaspiLEDMatrix {
             matrix.writeDisplay();
         }
         else {
-            matrix.writeString(rdMessage.getText(), 400, false);
+            matrix.writeString(rdMessage.getText(), 400, true);
         }
 
     }
