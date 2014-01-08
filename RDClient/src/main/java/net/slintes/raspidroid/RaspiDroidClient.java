@@ -27,6 +27,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.googlecode.androidannotations.annotations.*;
+import org.java_websocket.WebSocket;
 
 import java.net.URI;
 
@@ -95,6 +96,9 @@ public class RaspiDroidClient extends SherlockActivity {
     void connect(){
         if(connect.isChecked()){
             try {
+                if(ws != null && ws.getReadyState().equals(WebSocket.READYSTATE.OPEN)){
+                    ws.close();
+                }
                 ws = new WSClient(new URI(url.getText().toString()));
                 ws.connect();
             } catch (Exception e) {
@@ -105,8 +109,10 @@ public class RaspiDroidClient extends SherlockActivity {
                 looping = false;
                 loop.setChecked(false);
             }
-            ws.close();
-            ws = null;
+            if(ws != null){
+                ws.close();
+                ws = null;
+            }
         }
     }
 
