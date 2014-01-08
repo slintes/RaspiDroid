@@ -29,12 +29,20 @@ public class RDMessage {
 
     private final int x;
     private final int y;
+    private final String text;
 
     public RDMessage(int x, int y){
         checkValue(x);
         checkValue(y);
         this.x = x;
         this.y = y;
+        this.text = null;
+    }
+
+    public RDMessage(String text){
+        this.text = text;
+        this.x = -1;
+        this.y = -1;
     }
 
     public int getX() {
@@ -45,20 +53,36 @@ public class RDMessage {
         return y;
     }
 
+    public String getText() {
+        return text;
+    }
+
     private void checkValue(int i) throws IllegalArgumentException {
         if(i < 0 || i > 7) throw new IllegalArgumentException("value must be between 0 and 7");
     }
 
     public String toMessageString(){
-        // x and y are < 8, just concatenate them
-        return ("" + x) + y;
+        if(text == null){
+            // x and y are < 8, just concatenate them
+            return ("" + x) + y;
+        }
+        else {
+            // start with a "t" as marker that this is text
+            return "t" + text;
+        }
     }
 
     public static RDMessage fromMessageString(String msg) throws IllegalArgumentException {
         try{
-            int x = Integer.parseInt(msg.substring(0,1));
-            int y = Integer.parseInt(msg.substring(1));
-            return new RDMessage(x, y);
+            if(msg.length() > 0 &&  msg.startsWith("t")){
+                String text = msg.substring(1);
+                return new RDMessage(text);
+            }
+            else {
+                int x = Integer.parseInt(msg.substring(0,1));
+                int y = Integer.parseInt(msg.substring(1));
+                return new RDMessage(x, y);
+            }
         } catch (Exception e){
             throw new IllegalArgumentException("message must contain two Integers between 0 and 7" + e.getMessage());
         }

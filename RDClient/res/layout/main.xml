@@ -26,37 +26,64 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-        <EditText
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+            <EditText
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/defaultUrl"
+                    android:id="@+id/url"
+                    android:editable="true"
+                    android:enabled="true"
+                    android:inputType="textUri"
+                    android:hint="@string/defaultUrlHint"
+                    android:layout_weight="0.6"/>
+
+            <ToggleButton
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/connect"
+                    android:textOff="@string/connectButtonOff"
+                    android:textOn="@string/connectButtonOn"
+                    android:layout_weight="0.4"/>
+            />
+
+        </LinearLayout>
+
+        <ToggleButton
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/defaultUrl"
-                android:id="@+id/url"
-                android:editable="true"
-                android:enabled="true"
-                android:inputType="textUri"
-                android:hint="@string/defaultUrlHint"/>
+                android:id="@+id/loop"
+                android:textOff="@string/loopButtonOff"
+                android:textOn="@string/loopButtonOn"/>
 
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
 
-            <ToggleButton
-                    android:layout_width="fill_parent"
+            <EditText
+                    android:layout_width="0dip"
                     android:layout_height="wrap_content"
-                    android:id="@+id/connect"
-                    android:layout_weight="1"
-                    android:textOff="@string/connectButtonOff"
-                    android:textOn="@string/connectButtonOn"/>
+                    android:text="@string/defaultText"
+                    android:id="@+id/text"
+                    android:editable="true"
+                    android:enabled="true"
+                    android:inputType="text"
+                    android:hint="@string/defaultUrlHint"
+                    android:layout_weight="0.6"/>
+            />
 
-            <ToggleButton
-                    android:layout_width="fill_parent"
+            <Button
+                    android:layout_width="0dip"
                     android:layout_height="wrap_content"
-                    android:id="@+id/loop"
-                    android:layout_weight="1"
-                    android:textOff="@string/loopButtonOff"
-                    android:textOn="@string/loopButtonOn"/>
-
+                    android:id="@+id/sendText"
+                    android:text="@string/sendTextButton"
+                    android:layout_weight="0.4"/>
+            />
 
         </LinearLayout>
 

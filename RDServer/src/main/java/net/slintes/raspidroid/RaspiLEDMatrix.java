@@ -44,8 +44,13 @@ public class RaspiLEDMatrix {
 
         RDMessage rdMessage = RDMessage.fromMessageString(message);
         matrix.clear(true);
-        matrix.setPixel(rdMessage.getX(), rdMessage.getY(), LEDMatrix.LedColor.GREEN);
-        matrix.writeDisplay();
+        if(rdMessage.getText() == null){
+            matrix.setPixel(rdMessage.getX(), rdMessage.getY(), LEDMatrix.LedColor.GREEN);
+            matrix.writeDisplay();
+        }
+        else {
+            matrix.writeString(rdMessage.getText(), 400, false);
+        }
 
     }
 }

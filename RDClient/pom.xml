@@ -20,7 +20,7 @@
 	<modelVersion>4.0.0</modelVersion>
     <groupId>net.slintes.raspidroid</groupId>
     <artifactId>RaspiDroidClient</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
 	<packaging>apk</packaging>
 	<name>RaspiDroidClient</name>
 
@@ -87,7 +87,7 @@
         <dependency>
             <groupId>net.slintes.raspidroid</groupId>
             <artifactId>RaspiDroidCommon</artifactId>
-            <version>0.1</version>
+            <version>0.2</version>
         </dependency>
             
 	</dependencies>
@@ -168,6 +168,8 @@
                 </executions>
             </plugin>
 
+
+<!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jarsigner-plugin</artifactId>
@@ -200,20 +202,23 @@
                     </execution>
                 </executions>
             </plugin>
+-->
 
             <plugin>
                 <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                 <artifactId>android-maven-plugin</artifactId>
-                <version>3.4.0</version>
+                <version>3.8.2</version>
                 <extensions>true</extensions>
 
                 <configuration>
                     <sdk>
                         <platform>16</platform>
-                        <path>/opt/android-sdk-linux_x86/</path>
+                        <!--<path>/opt/android-sdk-linux_x86/</path>-->
+                        <path>D:\Data\msluiter\dev\android\sdk\</path>
                     </sdk>
                     <androidManifestFile>${project.build.directory}/filtered-manifest/AndroidManifest.xml</androidManifestFile>
                     <resourceDirectory>${project.build.directory}/filtered-res</resourceDirectory>
+<!--
                     <sign>
                         <debug>false</debug>
                     </sign>
@@ -227,6 +232,7 @@
                     <proguard>
                         <skip>true</skip>
                     </proguard>
+-->
                 </configuration>
 
                 <executions>

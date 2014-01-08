@@ -18,6 +18,7 @@ package net.slintes.raspidroid;
 
 import android.util.Log;
 import android.view.MotionEvent;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ToggleButton;
@@ -52,6 +53,12 @@ public class RaspiDroidClient extends SherlockActivity {
     @ViewById
     ToggleButton loop;
     private boolean looping;
+
+    @ViewById
+    EditText text;
+
+    @ViewById
+    Button sendText;
 
     @ViewById
     ImageView space;
@@ -141,6 +148,11 @@ public class RaspiDroidClient extends SherlockActivity {
 
         }
 
+    }
+
+    @Click
+    void sendText(){
+        ws.send(new RDMessage(text.getText().toString()));
     }
 
     @Touch

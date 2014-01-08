@@ -22,7 +22,7 @@
 
     <groupId>net.slintes.raspidroid</groupId>
     <artifactId>RaspiServer</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
     <name>RaspiDroidServer</name>
 
     <dependencies>
@@ -34,12 +34,12 @@
         <dependency>
             <groupId>net.slintes.raspi</groupId>
             <artifactId>AdafruitLEDBackPack</artifactId>
-            <version>0.3</version>
+            <version>0.4</version>
         </dependency>
         <dependency>
             <groupId>net.slintes.raspidroid</groupId>
             <artifactId>RaspiDroidCommon</artifactId>
-            <version>0.1</version>
+            <version>0.2</version>
         </dependency>
         <dependency>
             <!-- see /dummy-repo/readme.txt -->
@@ -100,7 +100,7 @@
     <distributionManagement>
         <repository>
             <id>raspi</id>
-            <url>scp://pi:rr@raspberrypi.local/home/pi/raspiDroid</url>
+            <url>scp://pi:rr@192.168.121.238/home/pi/raspiDroid</url>
         </repository>
     </distributionManagement>
 
