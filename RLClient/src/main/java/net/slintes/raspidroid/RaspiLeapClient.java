@@ -26,6 +26,7 @@ import java.io.IOException;
 public class RaspiLeapClient {
 
     static {
+        // copy dlls to working directory
         new LibLoader();
     }
 
@@ -38,9 +39,6 @@ public class RaspiLeapClient {
     }
 
     private void start() {
-
-        // copy dlls to working directory
-        new LibLoader();
 
         // create a leap motion listener and controller
         LeapListener listener = new LeapListener();
