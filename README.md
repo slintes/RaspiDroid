@@ -6,6 +6,10 @@ Supports scrolling text now, too, see this:
 * http://www.youtube.com/watch?v=JQi7WSU2Fak
 * https://twitter.com/slintes/status/420916372852318209/photo/1
 
+Another update: added a Leapmotion client (see RLClient directory):
+* http://www.youtube.com/watch?v=DRHMy_JaD0A
+ 
+
 Some links to used components and software:
 
 Pi OS and LED matrix:
