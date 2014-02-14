@@ -34,7 +34,7 @@
         <dependency>
             <groupId>net.slintes.raspi</groupId>
             <artifactId>AdafruitLEDBackPack</artifactId>
-            <version>0.4</version>
+            <version>0.5</version>
         </dependency>
         <dependency>
             <groupId>net.slintes.raspidroid</groupId>
@@ -42,10 +42,9 @@
             <version>0.2</version>
         </dependency>
         <dependency>
-            <!-- see /dummy-repo/readme.txt -->
-            <groupId>org.java_websocket</groupId>
+            <groupId>org.java-websocket</groupId>
             <artifactId>Java-WebSocket</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.3.0</version>
         </dependency>
     </dependencies>
 
@@ -89,18 +88,10 @@
         </extensions>
     </build>
 
-    <repositories>
-        <repository>
-            <!-- see /dummy-repo/readme.txt -->
-            <id>my-local-repo</id>
-            <url>file://${basedir}/dummy-repo</url>
-        </repository>
-    </repositories>
-
     <distributionManagement>
         <repository>
             <id>raspi</id>
-            <url>scp://pi:rr@192.168.121.238/home/pi/raspiDroid</url>
+            <url>scp://pi:rr@192.168.0.103/home/pi/raspiDroid</url>
         </repository>
     </distributionManagement>
 

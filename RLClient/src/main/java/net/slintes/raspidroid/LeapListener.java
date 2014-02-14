@@ -59,7 +59,7 @@ public class LeapListener extends Listener {
             int y = (int) ((posY - 100) / 200 * 8);
             x = Math.max(0, Math.min(7, x));
             y = Math.max(0, Math.min(7, y));
-            System.out.println("x: " + x + ", y: " + y);
+//            System.out.println("x: " + x + ", y: " + y);
             wsClient.send(new RDMessage(7 - y, x));
             try {
                 Thread.sleep(50);
